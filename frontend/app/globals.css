@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 14% 98%;
+    --foreground: 0 0% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+    --primary: 213 68% 51%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 20% 95%;
+    --secondary-foreground: 0 0% 12%;
+    --muted: 40 14% 95%;
+    --muted-foreground: 40 5% 46%;
+    --accent: 213 68% 96%;
+    --accent-foreground: 213 68% 30%;
+    --destructive: 2 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 12% 89%;
+    --input: 40 12% 89%;
+    --ring: 213 68% 51%;
+    --radius: 0.75rem;
+
+    /* dataviz categorical palette (light) */
+    --chart-1: #2a78d6;
+    --chart-2: #eb6834;
+    --chart-3: #1baf7a;
+    --chart-4: #eda100;
+    --chart-5: #e87ba4;
+    --chart-6: #008300;
+    --chart-7: #4a3aa7;
+    --chart-8: #e34948;
+    --chart-surface: #fcfcfb;
+    --chart-grid: #e1e0d9;
+    --chart-axis: #c3c2b7;
+    --chart-text-secondary: #52514e;
+    --chart-text-muted: #898781;
+  }
+
+  .dark {
+    --background: 0 0% 5%;
+    --foreground: 0 0% 100%;
+    --card: 60 2% 10%;
+    --card-foreground: 0 0% 100%;
+    --popover: 60 2% 10%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 213 68% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 60 2% 14%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 60 2% 14%;
+    --muted-foreground: 40 8% 74%;
+    --accent: 213 40% 18%;
+    --accent-foreground: 213 68% 80%;
+    --destructive: 2 72% 62%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 60 2% 18%;
+    --input: 60 2% 18%;
+    --ring: 213 68% 58%;
+
+    --chart-1: #3987e5;
+    --chart-2: #d95926;
+    --chart-3: #199e70;
+    --chart-4: #c98500;
+    --chart-5: #d55181;
+    --chart-6: #008300;
+    --chart-7: #9085e9;
+    --chart-8: #e66767;
+    --chart-surface: #1a1a19;
+    --chart-grid: #2c2c2a;
+    --chart-axis: #383835;
+    --chart-text-secondary: #c3c2b7;
+    --chart-text-muted: #898781;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-white/40 dark:border-white/10;
+  }
+  .gradient-mesh {
+    background:
+      radial-gradient(55% 45% at 12% -5%, hsl(213 68% 92% / 0.65), transparent 60%),
+      radial-gradient(45% 38% at 102% -8%, hsl(260 60% 92% / 0.55), transparent 60%),
+      radial-gradient(40% 35% at 50% 108%, hsl(165 55% 90% / 0.35), transparent 60%);
+  }
+  .dark .gradient-mesh {
+    background:
+      radial-gradient(55% 45% at 12% -5%, hsl(213 60% 22% / 0.4), transparent 60%),
+      radial-gradient(45% 38% at 102% -8%, hsl(260 50% 20% / 0.35), transparent 60%),
+      radial-gradient(40% 35% at 50% 108%, hsl(165 45% 16% / 0.25), transparent 60%);
+  }
+  .card-hover {
+    @apply transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/[0.06];
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(260 60% 55%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .ring-glow {
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.15), 0 8px 24px -8px hsl(var(--primary) / 0.35);
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+}

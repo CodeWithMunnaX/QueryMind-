@@ -1,0 +1,11 @@
+# CPU-only PyTorch: install with
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# then:
+#   pip install -r ml/requirements.txt
+transformers>=5.17
+datasets>=5.0
+accelerate>=1.15
+sqlglot>=30.19
+pandas>=2.2
+scikit-learn>=1.9
+dvc>=3.67

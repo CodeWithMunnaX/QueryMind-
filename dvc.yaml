@@ -1,0 +1,45 @@
+stages:
+  generate_data:
+    cmd: python ml/src/generate_training_data.py
+    deps:
+      - ml/src/generate_training_data.py
+      - backend/data/superstore.csv
+    params:
+      - generate_data.seed
+      - generate_data.val_fraction
+      - generate_data.test_fraction
+      - generate_data.max_examples
+    outs:
+      - ml/data/train.jsonl
+      - ml/data/val.jsonl
+      - ml/data/test.jsonl
+
+  train:
+    cmd: python ml/src/train.py
+    deps:
+      - ml/src/train.py
+      - ml/data/train.jsonl
+      - ml/data/val.jsonl
+    params:
+      - train.base_model
+      - train.epochs
+      - train.batch_size
+      - train.learning_rate
+      - train.max_input_length
+      - train.max_target_length
+      - train.seed
+    outs:
+      - ml/models/text2sql
+
+  evaluate:
+    cmd: python ml/src/evaluate.py
+    deps:
+      - ml/src/evaluate.py
+      - ml/models/text2sql
+      - ml/data/test.jsonl
+    outs:
+      - ml/predictions.jsonl:
+          cache: false
+    metrics:
+      - ml/metrics.json:
+          cache: false

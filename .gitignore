@@ -1,0 +1,31 @@
+# Secrets
+.env
+backend/.env
+frontend/.env.local
+*.env
+!*.env.example
+
+# Python
+backend/.venv/
+ml/.venv/
+backend/__pycache__/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+
+# DVC local remote storage (the actual data/model blobs live here, outside git)
+/dvc-storage/
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.turbo/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/

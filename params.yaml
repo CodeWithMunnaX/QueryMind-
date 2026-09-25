@@ -1,0 +1,14 @@
+generate_data:
+  seed: 42
+  val_fraction: 0.1
+  test_fraction: 0.1
+  max_examples: 1800
+
+train:
+  base_model: google/flan-t5-small
+  epochs: 3
+  batch_size: 8
+  learning_rate: 0.0003
+  max_input_length: 160
+  max_target_length: 96
+  seed: 42

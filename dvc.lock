@@ -1,0 +1,87 @@
+schema: '2.0'
+stages:
+  generate_data:
+    cmd: python ml/src/generate_training_data.py
+    deps:
+    - path: backend/data/superstore.csv
+      hash: md5
+      md5: 1cdb6c6655487cce184928c9f3353453
+      size: 934457
+    - path: ml/src/generate_training_data.py
+      hash: md5
+      md5: e4a5a0b153dad85a93294cee576de543
+      size: 7186
+    params:
+      params.yaml:
+        generate_data.max_examples: 1800
+        generate_data.seed: 42
+        generate_data.test_fraction: 0.1
+        generate_data.val_fraction: 0.1
+    outs:
+    - path: ml/data/test.jsonl
+      hash: md5
+      md5: d9040feac96fd160bcda03ab56df15eb
+      size: 20224
+    - path: ml/data/train.jsonl
+      hash: md5
+      md5: 6169e3e14f19c18eb7c86f046621d3bc
+      size: 165903
+    - path: ml/data/val.jsonl
+      hash: md5
+      md5: cb71df580f8967942c35772da9f96eda
+      size: 19721
+  train:
+    cmd: python ml/src/train.py
+    deps:
+    - path: ml/data/train.jsonl
+      hash: md5
+      md5: 6169e3e14f19c18eb7c86f046621d3bc
+      size: 165903
+    - path: ml/data/val.jsonl
+      hash: md5
+      md5: cb71df580f8967942c35772da9f96eda
+      size: 19721
+    - path: ml/src/train.py
+      hash: md5
+      md5: 0164a072c7da00628855e0e3067cf5a5
+      size: 4077
+    params:
+      params.yaml:
+        train.base_model: google/flan-t5-small
+        train.batch_size: 8
+        train.epochs: 3
+        train.learning_rate: 0.0003
+        train.max_input_length: 160
+        train.max_target_length: 96
+        train.seed: 42
+    outs:
+    - path: ml/models/text2sql
+      hash: md5
+      md5: f476f1a7812c4cce08fc43eeccb700ef.dir
+      size: 310301661
+      nfiles: 6
+  evaluate:
+    cmd: python ml/src/evaluate.py
+    deps:
+    - path: ml/data/test.jsonl
+      hash: md5
+      md5: d9040feac96fd160bcda03ab56df15eb
+      size: 20224
+    - path: ml/models/text2sql
+      hash: md5
+      md5: f476f1a7812c4cce08fc43eeccb700ef.dir
+      size: 310301661
+      nfiles: 6
+    - path: ml/src/evaluate.py
+      hash: md5
+      md5: d7d3f070e553a0b877fd355ede5f1df5
+      size: 2852
+    outs:
+    - path: ml/metrics.json
+      hash: md5
+      md5: c95327e9afcfba5310526439f999ad26
+      size: 75
+    - path: ml/predictions.jsonl
+      hash: md5
+      md5: 7a687f5977129be093b9e69c8b8e9599
+      size: 14599
