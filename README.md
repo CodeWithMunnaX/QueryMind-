@@ -19,9 +19,10 @@ query is validated (read-only, schema-checked, row/time-capped) before it ever t
 
 ## Tech stack
 
-**Frontend:** Next.js 15 · TypeScript · Tailwind CSS · Recharts · TanStack Query
-**Backend:** FastAPI · SQLAlchemy · Pandas · LangChain · OpenAI API · SQLGlot
-**Database:** PostgreSQL (tested on [Neon](https://neon.tech)) · **Infra:** Docker Compose
+- **Frontend:** Next.js 15 · TypeScript · Tailwind CSS · Recharts · TanStack Query
+- **Backend:** FastAPI · SQLAlchemy · Pandas · LangChain · OpenAI API · SQLGlot
+- **Database:** PostgreSQL (tested on [Neon](https://neon.tech))
+- **Infra:** Docker Compose
 
 ## Quick start
 
@@ -104,8 +105,11 @@ trains a small local text-to-SQL model from it (`dvc repro`). **Not used by the 
 
 ## Future improvements
 
-Streaming chat responses, a dedicated read-only DB role, multi-dataset support, password
-reset/email verification, OAuth login.
+- Streaming chat responses
+- A dedicated read-only DB role (defense in depth alongside app-level validation)
+- Multi-dataset support
+- Password reset / email verification
+- OAuth login (Google/GitHub)
 
 ## License
 
